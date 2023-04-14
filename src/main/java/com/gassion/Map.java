@@ -1,3 +1,7 @@
+package com.gassion;
+
+import com.gassion.Entity.Entity;
+
 import java.util.HashMap;
 
 public class Map {

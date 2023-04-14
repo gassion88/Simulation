@@ -1,4 +1,6 @@
-public class Grass extends Inanimate implements IEatable{
+package com.gassion.Entity;
+
+public class Grass extends Inanimate implements IEatable {
     private final int hpAmount;
 
     public Grass(Coordinates coordinates, int hpAmount) {

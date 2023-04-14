@@ -1,3 +1,5 @@
+package com.gassion;
+
 public class Coordinates {
     public final int x;
     public final int y;

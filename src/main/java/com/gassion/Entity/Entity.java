@@ -1,3 +1,5 @@
+package com.gassion.Entity;
+
 public abstract class Entity {
     public Coordinates coordinates;
 
