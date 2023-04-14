@@ -1,4 +1,4 @@
-package Entity.Creatures;
+package Entity.Creatures.Herbivores;
 
 import Entity.Creatures.Creature;
 import Entity.Entity;
