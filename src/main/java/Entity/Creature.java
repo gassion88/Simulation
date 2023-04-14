@@ -1,3 +1,5 @@
+package Entity;
+
 public abstract class Creature extends Entity {
     private final int maxHp;
     public int hp;

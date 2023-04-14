@@ -1,3 +1,5 @@
+package Map;
+
 public class Coordinates {
     public final int x;
     public final int y;

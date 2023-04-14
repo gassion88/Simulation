@@ -1,3 +1,5 @@
+package Entity;
+
 public abstract class Predator extends Creature {
     public int damage;
 

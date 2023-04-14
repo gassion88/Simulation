@@ -1,3 +1,5 @@
+package Entity;
+
 public abstract class Herbivore extends Creature implements IInteract {
     public Herbivore(int hp, int speed, Coordinates coordinates, int maxHp) {
         super(hp, speed, coordinates, maxHp);

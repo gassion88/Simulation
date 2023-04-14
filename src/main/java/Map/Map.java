@@ -1,3 +1,7 @@
+package Map;
+
+import Entity.Entity;
+
 import java.util.HashMap;
 
 public class Map {
