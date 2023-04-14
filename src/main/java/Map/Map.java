@@ -27,7 +27,7 @@ public class Map {
         entity.remove(coordinates);
     }
 
-    public boolean isSquareEmpty(Coordinates scuare) {
-        return !entity.containsKey(scuare);
+    public boolean isSquareEmpty(Coordinates square) {
+        return !entity.containsKey(square);
     }
 }
