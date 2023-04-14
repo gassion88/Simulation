@@ -6,9 +6,22 @@ public abstract class Predator extends Creature {
         this.damage = damage;
     }
 
-    public void attack(Entity entity){
-        Herbivore herbivore = (Herbivore)entity;
-        herbivore.setHp(damage);
+    @Override
+    public void toInteract(Entity entity) {
+        attack(entity);
     }
 
+    @Override
+    public boolean isInteract(Entity entity) {
+        if (entity instanceof Herbivore){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void attack(Entity entity){
+        Herbivore herbivore = (Herbivore)entity;
+        herbivore.setHp(-damage);
+    }
 }
