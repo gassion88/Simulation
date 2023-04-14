@@ -1,4 +1,4 @@
-package com.gassion;
+package Map;
 
 public class Coordinates {
     public final int x;
