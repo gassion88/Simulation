@@ -11,7 +11,9 @@ public abstract class Creature extends Entity {
     }
 
     public abstract void makeMove();
-    public abstract void  toInteract(IInteract interact);
+    public abstract  void  toInteract(Entity entity);
+
+    public abstract boolean isInteract(Entity entity);
 
     public void setHp( int hpAmount) {
         if ((hpAmount + hp) >= maxHp) {

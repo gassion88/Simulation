@@ -6,13 +6,9 @@ public abstract class Predator extends Creature {
         this.damage = damage;
     }
 
-    public void attack(IInteract interact){
-        Herbivore herbivore = (Herbivore)interact;
-        herbivore.hp -= damage;
+    public void attack(Entity entity){
+        Herbivore herbivore = (Herbivore)entity;
+        herbivore.setHp(damage);
     }
 
-    @Override
-    public void toInteract(IInteract interact) {
-        attack(interact);
-    }
 }

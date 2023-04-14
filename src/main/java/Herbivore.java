@@ -1,14 +1,24 @@
-public abstract class Herbivore extends Creature {
+public abstract class Herbivore extends Creature implements IInteract {
     public Herbivore(int hp, int speed, Coordinates coordinates, int maxHp) {
         super(hp, speed, coordinates, maxHp);
     }
 
-    public void eat(IInteract interact) {
-        setHp(interact.getHpAmount());
+    @Override
+    public void toInteract(Entity entity) {
+        eat(entity);
     }
 
     @Override
-    public void toInteract(IInteract interact) {
-        eat(interact);
+    public boolean isInteract(Entity entity) {
+        if (entity instanceof IEatable) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void eat(Entity entity) {
+        IEatable eatable = (IEatable)entity;
+        setHp(eatable.getHpAmount());
     }
 }
