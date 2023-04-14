@@ -1,4 +1,4 @@
-package Entity;
+package Entity.Inanimates;
 
 import Map.Coordinates;
 

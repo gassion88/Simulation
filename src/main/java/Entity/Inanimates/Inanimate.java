@@ -1,5 +1,6 @@
-package Entity;
+package Entity.Inanimates;
 
+import Entity.Entity;
 import Map.Coordinates;
 
 public abstract class Inanimate extends Entity {
