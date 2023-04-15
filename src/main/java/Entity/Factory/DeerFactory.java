@@ -1,6 +1,5 @@
 package Entity.Factory;
 
-import Actions.InitActions.EntityFactory;
 import Entity.Creatures.Herbivores.Deer;
 import Entity.Entity;
 import Map.Coordinates;

@@ -1,4 +1,4 @@
-package Actions.InitActions;
+package Entity.Factory;
 
 import Entity.Entity;
 

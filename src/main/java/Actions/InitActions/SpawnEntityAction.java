@@ -2,6 +2,7 @@ package Actions.InitActions;
 
 import Entity.Entity;
 import Entity.Factory.DeerFactory;
+import Entity.Factory.EntityFactory;
 import Entity.Factory.GrassFactory;
 import Entity.Factory.WolfFactory;
 import Map.*;
