@@ -14,6 +14,16 @@ public class Map {
         this.weight = weight;
     }
 
+    public void setEntity(Coordinates coordinates, Entity entity) {
+        entity.coordinates = coordinates;
+        this.entity.put(coordinates, entity);
+    }
 
+    public Entity getEntity(Coordinates coordinates) {
+        return this.entity.get(coordinates);
+    }
 
+    public void removeEntity(Coordinates coordinates) {
+        entity.remove(coordinates);
+    }
 }
