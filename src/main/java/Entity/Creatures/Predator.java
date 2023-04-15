@@ -1,5 +1,6 @@
-package Entity;
+package Entity.Creatures;
 
+import Entity.Entity;
 import Map.Coordinates;
 
 public abstract class Predator extends Creature {
