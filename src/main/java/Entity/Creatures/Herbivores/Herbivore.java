@@ -6,8 +6,8 @@ import Entity.Inanimates.IEatable;
 import Map.Coordinates;
 
 public abstract class Herbivore extends Creature {
-    public Herbivore(int hp, int speed, Coordinates coordinates, int maxHp) {
-        super(hp, speed, coordinates, maxHp);
+    public Herbivore(int hp, int speed, Coordinates coordinates, int maxHp, String sprite) {
+        super(hp, speed, coordinates, maxHp, sprite);
     }
 
     @Override

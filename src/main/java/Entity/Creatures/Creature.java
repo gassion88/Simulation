@@ -8,8 +8,8 @@ public abstract class Creature extends Entity {
     public int hp;
     public final int speed;
 
-    public Creature(int hp, int speed, Coordinates coordinates, int maxHp) {
-        super(coordinates);
+    public Creature(int hp, int speed, Coordinates coordinates, int maxHp, String sprite) {
+        super(coordinates, sprite);
         this.hp = hp;
         this.speed = speed;
         this.maxHp = maxHp;

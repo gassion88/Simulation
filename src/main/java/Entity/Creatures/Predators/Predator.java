@@ -8,8 +8,8 @@ import Map.Coordinates;
 public abstract class Predator extends Creature {
     public int damage;
 
-    public Predator(int hp, int speed, Coordinates coordinates, int damage, int maxHp) {
-        super(hp, speed, coordinates, maxHp);
+    public Predator(int hp, int speed, Coordinates coordinates, int damage, int maxHp, String sprite) {
+        super(hp, speed, coordinates, maxHp, sprite);
         this.damage = damage;
     }
 

@@ -1,8 +1,7 @@
 package Map;
 
 public class MapConsoleRenderer {
-    public void renderer(Map map) {
-
+    public void render(Map map) {
         for (int rowIndex = 1; rowIndex <= map.height; rowIndex++) {
             String rowView = "";
             for (int columnIndex = 1; columnIndex <= map.weight; columnIndex++) {
@@ -29,7 +28,7 @@ public class MapConsoleRenderer {
 
     public static void main(String[] args) {
         Map map = new Map(7, 7);
-        new MapConsoleRenderer().renderer(map);
+        new MapConsoleRenderer().render(map);
         // map.setEntity(new Coordinates(1,1), );
 
     }
