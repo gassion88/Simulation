@@ -1,5 +1,7 @@
 package Entity;
 
+import Map.Coordinates;
+
 public class Grass extends Inanimate implements IEatable{
     private final int hpAmount;
 
