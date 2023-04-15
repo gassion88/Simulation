@@ -12,14 +12,16 @@ import java.util.*;
 
 public class SpawnEntityAction extends InitAction {
     HashMap<EntityFactory, Integer> possibleEntity;
+    Map map;
     Random random = new Random();
 
-    public SpawnEntityAction(HashMap<EntityFactory, Integer> possibleEntity) {
+    public SpawnEntityAction(HashMap<EntityFactory, Integer> possibleEntity, Map map) {
         this.possibleEntity = possibleEntity;
+        this.map = map;
     }
 
     @Override
-    public void init(Map map) {
+    public void init() {
         spawnPossibleEntity(map, possibleEntity);
     }
 
@@ -56,13 +58,15 @@ public class SpawnEntityAction extends InitAction {
 
     public static void main(String[] args) {
         Map map = new Map(10,10);
-        HashMap<EntityFactory, Integer> entity = new HashMap<>();
 
-        entity.put(new WolfFactory(), 5);
-        entity.put(new DeerFactory(), 10);
-        entity.put(new GrassFactory(), 10);
+        HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn = new HashMap<>();
+        entityAndHerProbabilitySpawn.put(new WolfFactory(), 5);
+        entityAndHerProbabilitySpawn.put(new DeerFactory(), 10);
+        entityAndHerProbabilitySpawn.put(new GrassFactory(), 10);
 
-        SpawnEntityAction spawnEntityAction = new SpawnEntityAction(entity);
-        spawnEntityAction.init(map);
+        SpawnEntityAction spawnEntityAction = new SpawnEntityAction(entityAndHerProbabilitySpawn, map);
+        spawnEntityAction.init();
+
+        new MapConsoleRenderer().render(map);
     }
 }
