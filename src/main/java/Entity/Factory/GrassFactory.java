@@ -1,5 +1,6 @@
-package Actions.InitActions;
+package Entity.Factory;
 
+import Actions.InitActions.EntityFactory;
 import Entity.Entity;
 import Entity.Inanimates.Grass;
 import Map.Coordinates;

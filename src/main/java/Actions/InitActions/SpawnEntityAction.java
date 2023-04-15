@@ -1,9 +1,9 @@
 package Actions.InitActions;
 
-import Entity.Creatures.Herbivores.Deer;
-import Entity.Creatures.Predators.Wolf;
 import Entity.Entity;
-import Entity.Inanimates.Tree;
+import Entity.Factory.DeerFactory;
+import Entity.Factory.GrassFactory;
+import Entity.Factory.WolfFactory;
 import Map.*;
 import Map.Map;
 
