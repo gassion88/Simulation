@@ -1,6 +1,8 @@
-package Entity.Creatures;
+package Entity.Creatures.Herbivores;
 
+import Entity.Creatures.Creature;
 import Entity.Entity;
+import Entity.Inanimates.IEatable;
 import Map.Coordinates;
 
 public abstract class Herbivore extends Creature {

@@ -1,5 +1,7 @@
-package Entity.Creatures;
+package Entity.Creatures.Predators;
 
+import Entity.Creatures.Creature;
+import Entity.Creatures.Herbivores.Herbivore;
 import Entity.Entity;
 import Map.Coordinates;
 
