@@ -4,5 +4,5 @@ import Actions.Action;
 import Map.Map;
 
 public abstract class TurnAction extends Action {
-    public abstract void turn(Map map);
+    public abstract void turn();
 }
