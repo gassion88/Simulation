@@ -1,5 +1,7 @@
 package Entity;
 
+import Map.Coordinates;
+
 public abstract class Creature extends Entity {
     private final int maxHp;
     public int hp;
