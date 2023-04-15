@@ -1,5 +1,7 @@
 package Map;
 
+import Entity.Entity;
+
 public class MapConsoleRenderer {
     public void render(Map map) {
         for (int rowIndex = 1; rowIndex <= map.height; rowIndex++) {
@@ -10,7 +12,8 @@ public class MapConsoleRenderer {
                 if (map.isSquareEmpty(square)) {
                     rowView += getEmptySquareSprite();
                 } else {
-                    rowView += getEntitySprite();
+                    Entity entity = map.getEntity(square);
+                    rowView += getEntitySpriteForEntity(entity);
                 }
             }
 
@@ -18,8 +21,8 @@ public class MapConsoleRenderer {
         }
     }
 
-    private String getEntitySprite() {
-        return "*";
+    private String getEntitySpriteForEntity(Entity entity) {
+        return entity.sprite;
     }
 
     private String getEmptySquareSprite() {
