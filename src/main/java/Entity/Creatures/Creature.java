@@ -1,7 +1,7 @@
 package Entity.Creatures;
 
 import Entity.Entity;
-import Map.Coordinates;
+import Map.*;
 
 public abstract class Creature extends Entity {
     private final int maxHp;
@@ -18,7 +18,8 @@ public abstract class Creature extends Entity {
     public abstract void makeMove();
     public abstract  void  toInteract(Entity entity);
 
-    public abstract boolean isInteract(Entity entity);
+    public abstract boolean isCanInteract(Map map);
+    public abstract void go(Map map);
 
     public void setHp( int hpAmount) {
         if ((hpAmount + hp) >= maxHp) {
