@@ -22,7 +22,7 @@ public class MapConsoleRenderer {
     }
 
     private String getEntitySpriteForEntity(Entity entity) {
-        return entity.sprite;
+        return entity.sprite + "  ";
     }
 
     private String getEmptySquareSprite() {
