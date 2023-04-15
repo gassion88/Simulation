@@ -2,5 +2,6 @@ package Actions.InitActions;
 
 import Actions.Action;
 
-public class InitAction extends Action {
+public abstract class InitAction extends Action {
+    public abstract void init();
 }
