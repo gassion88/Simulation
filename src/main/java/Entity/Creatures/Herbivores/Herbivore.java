@@ -4,24 +4,16 @@ import Entity.Creatures.Creature;
 import Entity.Entity;
 import Entity.Inanimates.IEatable;
 import Map.Coordinates;
+import Map.Map;
 
 public abstract class Herbivore extends Creature {
-    public Herbivore(int hp, int speed, Coordinates coordinates, int maxHp, String sprite) {
-        super(hp, speed, coordinates, maxHp, sprite);
+    public Herbivore(Coordinates coordinates, String sprite, Map map, int maxHp, int hp, int speed) {
+        super(coordinates, sprite, map, maxHp, hp, speed);
     }
 
     @Override
     public void toInteract(Entity entity) {
         eat(entity);
-    }
-
-    @Override
-    public boolean isInteract(Entity entity) {
-        if (entity instanceof IEatable) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private void eat(Entity entity) {

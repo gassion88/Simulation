@@ -3,13 +3,13 @@ package Entity.Creatures.Predators;
 import Entity.Creatures.Creature;
 import Entity.Creatures.Herbivores.Herbivore;
 import Entity.Entity;
-import Map.Coordinates;
+import Map.*;
 
 public abstract class Predator extends Creature {
     public int damage;
 
-    public Predator(int hp, int speed, Coordinates coordinates, int damage, int maxHp, String sprite) {
-        super(hp, speed, coordinates, maxHp, sprite);
+    public Predator(Coordinates coordinates, String sprite, Map map, int maxHp, int hp, int speed, int damage) {
+        super(coordinates, sprite, map, maxHp, hp, speed);
         this.damage = damage;
     }
 
@@ -19,12 +19,8 @@ public abstract class Predator extends Creature {
     }
 
     @Override
-    public boolean isInteract(Entity entity) {
-        if (entity instanceof Herbivore){
-            return true;
-        } else {
-            return false;
-        }
+    public void makeMove() {
+
     }
 
     public void attack(Entity entity){

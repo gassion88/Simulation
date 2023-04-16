@@ -1,10 +1,11 @@
 package Entity.Creatures.Herbivores;
 
 import Map.Coordinates;
+import Map.Map;
 
 public class Deer extends Herbivore{
-    public Deer(int hp, int speed, Coordinates coordinates, int maxHp, String sprite) {
-        super(hp, speed, coordinates, maxHp, sprite);
+    public Deer(Coordinates coordinates, String sprite, Map map, int maxHp, int hp, int speed) {
+        super(coordinates, sprite, map, maxHp, hp, speed);
     }
 
     @Override

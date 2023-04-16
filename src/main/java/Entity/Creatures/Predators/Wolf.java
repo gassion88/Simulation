@@ -1,10 +1,11 @@
 package Entity.Creatures.Predators;
 
 import Map.Coordinates;
+import Map.Map;
 
 public class Wolf extends Predator{
-    public Wolf(int hp, int speed, Coordinates coordinates, int damage, int maxHp, String sprite) {
-        super(hp, speed, coordinates, damage, maxHp, sprite);
+    public Wolf(Coordinates coordinates, String sprite, Map map, int maxHp, int hp, int speed, int damage) {
+        super(coordinates, sprite, map, maxHp, hp, speed, damage);
     }
 
     @Override

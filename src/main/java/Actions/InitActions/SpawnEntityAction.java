@@ -46,7 +46,7 @@ public class SpawnEntityAction extends InitAction {
                 continue;
             }
 
-            Entity entity = entityFactory.create();
+            Entity entity = entityFactory.create(map);
             map.setEntity(spawnCoordinate, entity);
             i++;
 
