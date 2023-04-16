@@ -23,9 +23,32 @@ public abstract class Creature extends Entity {
     public abstract void makeMove();
     public abstract  void  toInteract(Entity entity);
 
-    public abstract boolean isCanInteract();
+    public boolean isCanInteract(Class<?> entityClass){
+        return getInteractEntityCoordinates(entityClass) != null;
+    }
 
-    public abstract Coordinates getInteractEntityCoordinates();
+    public Coordinates getInteractEntityCoordinates(Class<?> classType) {
+        Coordinates verifiableCoordinates = null;
+
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                if (x == 0 && y == 0) {continue;}
+
+                verifiableCoordinates = new Coordinates(coordinates.x + x, coordinates.y + y);
+
+                if (!map.isSquareEmpty(verifiableCoordinates)) {
+                    Entity interactEntity = map.getEntity(verifiableCoordinates);
+
+                    if (classType.isAssignableFrom(interactEntity.getClass()) ) {
+                        return verifiableCoordinates;
+                    }
+                }
+            }
+        }
+
+        verifiableCoordinates = null;
+        return verifiableCoordinates;
+    }
     public abstract void go(Map map);
 
     public void setHp( int hpAmount) {
