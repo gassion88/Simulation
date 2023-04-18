@@ -19,6 +19,7 @@ public class MapConsoleRenderer {
 
             System.out.println(rowView);
         }
+        System.out.println("");
     }
 
     private String getEntitySpriteForEntity(Entity entity) {
