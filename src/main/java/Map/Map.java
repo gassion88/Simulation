@@ -30,4 +30,14 @@ public class Map {
     public boolean isSquareEmpty(Coordinates square) {
         return !entity.containsKey(square);
     }
+
+    public boolean isSquareExist(Coordinates coordinates) {
+        int x = coordinates.x;
+        int y = coordinates.y;
+
+        if (x < 1 || x > weight) return false;
+        if (y < 1 || y > height) return false;
+
+        return true;
+    }
 }
