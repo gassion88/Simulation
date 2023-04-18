@@ -1,8 +1,11 @@
 package Map;
 
+import Entity.Creatures.service.Node;
 import Entity.Entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Map {
     public final int height;
@@ -39,5 +42,24 @@ public class Map {
         if (y < 1 || y > height) return false;
 
         return true;
+    }
+
+    public List<Entity> getEntityByType(Class<?> entityType) {
+        List<Entity> entities = new ArrayList<>();
+
+        for (Entity entity : this.entity.values()) {
+            if (entityType.isAssignableFrom(entity.getClass())) {
+                entities.add(entity);
+            }
+        }
+
+        return entities;
+    }
+
+    public void moveEntity(Coordinates startCoordinates, Coordinates targetCoordinates) {
+        Entity entity = getEntity(startCoordinates);
+        removeEntity(startCoordinates);
+
+        setEntity(targetCoordinates, entity);
     }
 }
