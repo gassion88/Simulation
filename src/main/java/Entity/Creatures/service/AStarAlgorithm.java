@@ -23,7 +23,7 @@ public class AStarAlgorithm {
         this.start = start;
         this.target = target;
         this.map = map;
-        this.currentNode = new Node(null, null, start, 0);
+        this.currentNode = new Node(null, null, start, 0, 0);
         this.openList.add(currentNode);
     }
 
@@ -105,20 +105,27 @@ public class AStarAlgorithm {
                 }
 
                 Coordinates coordinates = new Coordinates(currentNode.getCoordinates().x + x, currentNode.getCoordinates().y + y);
+
+                if (isNodeClosed(coordinates)) {
+                    continue;
+                }
+
                 if (isNodeMarked(coordinates)) {
                     Node markedNode = getMarkedNode(coordinates);
-                    int markedNodeNewCost = currentNode.getCost() + getNodeCost(coordinates);
+                    int markedNodeNewCost = currentNode.getLengthToStart() + getHeuristics(coordinates, target);
 
                     if (markedNode.getCost() > markedNodeNewCost) {
                         markedNode.setCost(markedNodeNewCost);
+                        markedNode.setLengthToStart(getNodeLengthToStart(markedNode.getCoordinates()));
                     }
 
                     continue;
                 }
 
-                if (map.isSquareExist(coordinates) && map.isSquareEmpty(coordinates)) {
-                    int newNodeCost = currentNode.getCost() + getNodeCost(coordinates);
-                    Node newNode = new Node(currentNode, null, coordinates, newNodeCost);
+                if (map.isSquareExist(coordinates) && isSquareTargetOrEmpty(coordinates)) {
+                    int newNodeLenStart = getNodeLengthToStart(coordinates);
+                    int newNodeCost = newNodeLenStart + getHeuristics(coordinates, target);
+                    Node newNode = new Node(currentNode, null, coordinates, newNodeCost, newNodeLenStart);
 
                     nearestNods.add(newNode);
                 }
@@ -126,6 +133,32 @@ public class AStarAlgorithm {
         }
 
         return nearestNods;
+    }
+
+    private boolean isSquareTargetOrEmpty(Coordinates coordinates) {
+        return map.isSquareEmpty(coordinates) || coordinates.equals(target);
+    }
+
+    private int getNodeLengthToStart(Coordinates coordinates) {
+        int lenToStart = currentNode.getLengthToStart();
+
+        if (coordinates.x == currentNode.getCoordinates().x || coordinates.y == currentNode.getCoordinates().y) {
+            lenToStart += PATH_COST_DIRECT;
+        }else {
+            lenToStart += PATH_COST_DIAGONAL;
+        }
+
+        return lenToStart;
+    }
+
+    private boolean isNodeClosed(Coordinates coordinates) {
+        for (Node node : closedList) {
+            if (node.getCoordinates().equals(coordinates)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private Node getMarkedNode(Coordinates coordinates) {
@@ -141,19 +174,6 @@ public class AStarAlgorithm {
     private boolean isNodeMarked(Coordinates coordinates) {
         return getMarkedNode(coordinates) != null;
 
-    }
-
-    private int getNodeCost(Coordinates newNodeCoordinates) {
-        int cost = 0;
-        int heuristics = getHeuristics(newNodeCoordinates, target);
-
-        if (newNodeCoordinates.x == currentNode.getCoordinates().x || newNodeCoordinates.y == currentNode.getCoordinates().y) {
-            cost = PATH_COST_DIRECT + heuristics;
-        }else {
-            cost = PATH_COST_DIAGONAL + heuristics;
-        }
-
-        return cost;
     }
 
     private int getHeuristics(Coordinates newNodeCoordinates, Coordinates targetNodeCoordinates) {
