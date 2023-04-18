@@ -9,12 +9,14 @@ public class Node {
     public Node to;
     private Coordinates coordinates;
     private int cost;
+    private int lengthToStart;
 
-    public Node(Node from, Node to, Coordinates coordinates, int cost) {
+    public Node(Node from, Node to, Coordinates coordinates, int cost, int lengthToStart) {
         this.from = from;
         this.to = to;
         this.coordinates = coordinates;
         this.cost = cost;
+        this.lengthToStart = lengthToStart;
     }
 
     public Coordinates getCoordinates() {
@@ -31,6 +33,14 @@ public class Node {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public int getLengthToStart() {
+        return lengthToStart;
+    }
+
+    public void setLengthToStart(int lengthToStart) {
+        this.lengthToStart = lengthToStart;
     }
 
     @Override
