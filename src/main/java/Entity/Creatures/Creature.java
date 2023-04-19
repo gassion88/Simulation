@@ -59,5 +59,10 @@ public abstract class Creature extends Entity {
         } else {
             hp += hpAmount;
         }
+
+        if (hp <= 0) {
+            map.removeEntity(coordinates);
+        }
+
     }
 }
