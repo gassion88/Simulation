@@ -2,16 +2,13 @@ package Entity.Creatures.Predators;
 
 import Entity.Creatures.Creature;
 import Entity.Creatures.Herbivores.Herbivore;
-import Entity.Creatures.service.AStarAlgorithm;
-import Entity.Creatures.service.Node;
+import service.Node;
 import Entity.Entity;
-import Entity.Inanimates.IEatable;
 import Map.*;
 
-import java.nio.file.Path;
 import java.util.List;
 
-import static Entity.Creatures.service.PathFinder.getPath;
+import static service.PathFinder.getPath;
 
 public abstract class Predator extends Creature {
     public int damage;

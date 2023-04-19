@@ -1,4 +1,4 @@
-package Entity.Creatures.service;
+package service;
 
 import Map.*;
 
