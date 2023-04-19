@@ -11,6 +11,8 @@ import Map.*;
 import java.nio.file.Path;
 import java.util.List;
 
+import static Entity.Creatures.service.PathFinder.getPath;
+
 public abstract class Predator extends Creature {
     public int damage;
 
@@ -43,10 +45,9 @@ public abstract class Predator extends Creature {
 
     @Override
     public void go(Map map) {
-        Coordinates targetCoordinates = map.getEntityByType(Herbivore.class).get(0).coordinates;
-        AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(coordinates, targetCoordinates, map);
-
-        List<Node> path = aStarAlgorithm.getPath();
+        Entity targetEntity = (Creature)map.getEntityByType(Herbivore.class).get(0);
+        Coordinates targetCoordinates = targetEntity.coordinates;
+        List<Node> path =  getPath(coordinates, targetCoordinates, map);
 
         for (int i = 0; i < speed; i++) {
             if (isCanInteract(Herbivore.class)) {
@@ -61,6 +62,5 @@ public abstract class Predator extends Creature {
 
             new MapConsoleRenderer().render(map);
         }
-
     }
 }

@@ -2,10 +2,16 @@ package Entity.Creatures.Herbivores;
 
 import Entity.Creatures.Creature;
 import Entity.Creatures.Predators.Predator;
+import Entity.Creatures.service.AStarAlgorithm;
+import Entity.Creatures.service.Node;
+import Entity.Creatures.service.PathFinder;
 import Entity.Entity;
 import Entity.Inanimates.IEatable;
-import Map.Coordinates;
-import Map.Map;
+import Map.*;
+
+import java.util.List;
+
+import static Entity.Creatures.service.PathFinder.getPath;
 
 public abstract class Herbivore extends Creature {
     public Herbivore(Coordinates coordinates, String sprite, Map map, int maxHp, int hp, int speed) {
@@ -38,6 +44,22 @@ public abstract class Herbivore extends Creature {
 
     @Override
     public void go(Map map) {
+        Entity targetiEatable = (Entity) map.getEntityByType(IEatable.class).get(0);
+        Coordinates targetCoordinates = targetiEatable.coordinates;
+        List<Node> path =  getPath(coordinates, targetCoordinates, map);
 
+        for (int i = 0; i < speed; i++) {
+            if (isCanInteract(Herbivore.class)) {
+                Coordinates interactEntityCoordinates = getInteractEntityCoordinates(Herbivore.class);
+                Entity entity = map.getEntity(interactEntityCoordinates);
+
+                toInteract(entity);
+                break;
+            } else {
+                map.moveEntity(coordinates, path.get(i).getCoordinates());
+            }
+
+            new MapConsoleRenderer().render(map);
+        }
     }
 }
