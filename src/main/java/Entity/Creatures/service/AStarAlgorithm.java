@@ -1,48 +1,37 @@
 package Entity.Creatures.service;
 
-import Entity.Entity;
 import Map.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 public class AStarAlgorithm {
     private static final int PATH_COST_DIAGONAL = 14;
     private static final int PATH_COST_DIRECT = 10;
-    private final Coordinates start;
-    private final Coordinates target;
-    private Map map;
-    private List<Node> openList = new ArrayList<>();
-    private List<Node> closedList = new ArrayList<>();
-    private Node currentNode;
-    private List<Node> path = new ArrayList<>();
 
-    public AStarAlgorithm(Coordinates start, Coordinates target, Map map) {
-        this.start = start;
-        this.target = target;
-        this.map = map;
-        this.currentNode = new Node(null, null, start, 0, 0);
-        this.openList.add(currentNode);
-    }
+    public static List<Node> getPath(Coordinates start, Coordinates target, Map map){
+        Node currentNode = new Node(null, null, start, 0, 0);
+        List<Node> openList = new ArrayList<>();
+        List<Node> closedList = new ArrayList<>();
+        List<Node> path = new ArrayList<>();
 
-    public List<Node> getPath(){
+        openList.add(currentNode);
+
         while (!openList.isEmpty()) {
-            openList.addAll(getNearestNods());
+            openList.addAll(getNearestNods(currentNode, closedList, openList, target, map));
 
-            if (isTargetFound(openList)) {
-                path = getPathByTargetNode();
+            if (isTargetFound(start, target, openList)) {
+                path = getPathByTargetNode(start, target, openList);
                 return path;
             }
 
-            selectSmallestNodeCost();
+            currentNode = selectSmallestNodeCost(openList, closedList, currentNode);
         }
 
         return path;
     }
 
-    private List<Node> getPathByTargetNode() {
+    private static List<Node> getPathByTargetNode(Coordinates start, Coordinates target, List<Node> openList) {
         Node targetNode = null;
         List<Node> path = new ArrayList<>();
 
@@ -65,26 +54,26 @@ public class AStarAlgorithm {
         return  path;
     }
 
-    private boolean isTargetFound(List<Node> openList) {
-        return !getPathByTargetNode().isEmpty();
+    private static boolean isTargetFound(Coordinates start, Coordinates target, List<Node> openList) {
+        return !getPathByTargetNode(start, target, openList).isEmpty();
 
     }
 
-    private void selectSmallestNodeCost() {
+    private static Node selectSmallestNodeCost(List<Node> openList, List<Node> closedList, Node currentNode) {
         openList.remove(currentNode);
         closedList.add(currentNode);
 
         if (openList.isEmpty()) {
-            return;
+            return null;
         }
-        currentNode = getSmallestNode(openList);
+        return currentNode = getSmallestNode(openList);
     }
 
-    private Node getSmallestNode(List<Node> openList) {
+    private static Node getSmallestNode(List<Node> openList) {
         Node min = openList.get(0);
 
         for(Node node : openList) {
-            if (node.getCoordinates().equals(start)) {
+            if (node.getCost() == 0) {
                 continue;
             }
             if (node.getCost() < min.getCost()) {
@@ -95,7 +84,7 @@ public class AStarAlgorithm {
         return min;
     }
 
-    private List<Node> getNearestNods() {
+    private static List<Node> getNearestNods(Node currentNode, List<Node> closedList, List<Node> openList, Coordinates target, Map map) {
         List<Node> nearestNods = new ArrayList<>();
 
         for (int x = -1; x <=1; x++) {
@@ -106,24 +95,24 @@ public class AStarAlgorithm {
 
                 Coordinates coordinates = new Coordinates(currentNode.getCoordinates().x + x, currentNode.getCoordinates().y + y);
 
-                if (isNodeClosed(coordinates)) {
+                if (isNodeClosed(coordinates, closedList)) {
                     continue;
                 }
 
-                if (isNodeMarked(coordinates)) {
-                    Node markedNode = getMarkedNode(coordinates);
+                if (isNodeMarked(coordinates, openList)) {
+                    Node markedNode = getMarkedNode(coordinates, openList);
                     int markedNodeNewCost = currentNode.getLengthToStart() + getHeuristics(coordinates, target);
 
                     if (markedNode.getCost() > markedNodeNewCost) {
                         markedNode.setCost(markedNodeNewCost);
-                        markedNode.setLengthToStart(getNodeLengthToStart(markedNode.getCoordinates()));
+                        markedNode.setLengthToStart(getNodeLengthToStart(markedNode.getCoordinates(), currentNode));
                     }
 
                     continue;
                 }
 
-                if (map.isSquareExist(coordinates) && isSquareTargetOrEmpty(coordinates)) {
-                    int newNodeLenStart = getNodeLengthToStart(coordinates);
+                if (map.isSquareExist(coordinates) && isSquareTargetOrEmpty(coordinates, target, map)) {
+                    int newNodeLenStart = getNodeLengthToStart(coordinates, currentNode);
                     int newNodeCost = newNodeLenStart + getHeuristics(coordinates, target);
                     Node newNode = new Node(currentNode, null, coordinates, newNodeCost, newNodeLenStart);
 
@@ -135,11 +124,11 @@ public class AStarAlgorithm {
         return nearestNods;
     }
 
-    private boolean isSquareTargetOrEmpty(Coordinates coordinates) {
+    private static boolean isSquareTargetOrEmpty(Coordinates coordinates, Coordinates target, Map map) {
         return map.isSquareEmpty(coordinates) || coordinates.equals(target);
     }
 
-    private int getNodeLengthToStart(Coordinates coordinates) {
+    private static int getNodeLengthToStart(Coordinates coordinates, Node currentNode) {
         int lenToStart = currentNode.getLengthToStart();
 
         if (coordinates.x == currentNode.getCoordinates().x || coordinates.y == currentNode.getCoordinates().y) {
@@ -151,7 +140,7 @@ public class AStarAlgorithm {
         return lenToStart;
     }
 
-    private boolean isNodeClosed(Coordinates coordinates) {
+    private static boolean isNodeClosed(Coordinates coordinates, List<Node> closedList) {
         for (Node node : closedList) {
             if (node.getCoordinates().equals(coordinates)) {
                 return true;
@@ -161,7 +150,7 @@ public class AStarAlgorithm {
         return false;
     }
 
-    private Node getMarkedNode(Coordinates coordinates) {
+    private static Node getMarkedNode(Coordinates coordinates, List<Node> openList) {
         for (Node node : openList) {
             if (node.getCoordinates().equals(coordinates)) {
                 return node;
@@ -171,22 +160,13 @@ public class AStarAlgorithm {
         return null;
     }
 
-    private boolean isNodeMarked(Coordinates coordinates) {
-        return getMarkedNode(coordinates) != null;
+    private static boolean isNodeMarked(Coordinates coordinates, List<Node> openList) {
+        return getMarkedNode(coordinates, openList) != null;
 
     }
 
-    private int getHeuristics(Coordinates newNodeCoordinates, Coordinates targetNodeCoordinates) {
+    private static int getHeuristics(Coordinates newNodeCoordinates, Coordinates targetNodeCoordinates) {
         return (Math.abs(newNodeCoordinates.x - targetNodeCoordinates.x) +
                 Math.abs(newNodeCoordinates.y - targetNodeCoordinates.y)) * 10;
-    }
-
-    public static void main(String[] args) {
-        Map map = new Map(10,10);
-
-        AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(new Coordinates(2, 2), new Coordinates(5, 2), map);
-        List<Node> nodes = aStarAlgorithm.getPath();
-
-        System.out.println("123");
     }
 }
