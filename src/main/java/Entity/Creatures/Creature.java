@@ -4,8 +4,12 @@ import Entity.Creatures.Herbivores.Herbivore;
 import Entity.Entity;
 import Entity.Inanimates.IEatable;
 import Map.*;
+import service.Node;
 
+import java.util.List;
 import java.util.Objects;
+
+import static service.PathFinder.getPath;
 
 public abstract class Creature extends Entity {
     private final int maxHp;
@@ -51,7 +55,27 @@ public abstract class Creature extends Entity {
         verifiableCoordinates = null;
         return verifiableCoordinates;
     }
-    public abstract void go(Map map);
+
+    public void go(Class<?> entityClass) {
+        List<Entity> targets = map.getEntityByType(entityClass);
+        Entity targetEntity = targets.get(0);
+        Coordinates targetCoordinates = targetEntity.coordinates;
+        List<Node> path =  getPath(coordinates, targetCoordinates, map);
+
+        for (int i = 0; i < speed; i++) {
+            if (isCanInteract(entityClass)) {
+                Coordinates interactEntityCoordinates = getInteractEntityCoordinates(entityClass);
+                Entity entity = map.getEntity(interactEntityCoordinates);
+
+                toInteract();
+                break;
+            } else {
+                map.moveEntity(coordinates, path.get(i).getCoordinates());
+            }
+
+            new MapConsoleRenderer().render(map);
+        }
+    }
 
     public void setHp( int hpAmount) {
         if ((hpAmount + hp) >= maxHp) {
@@ -65,6 +89,5 @@ public abstract class Creature extends Entity {
         if (hp <= 0) {
             map.removeEntity(coordinates);
         }
-
     }
 }

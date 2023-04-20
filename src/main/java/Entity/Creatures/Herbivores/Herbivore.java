@@ -20,7 +20,7 @@ public abstract class Herbivore extends Creature {
         if (isCanInteract(IEatable.class)) {
             toInteract();
         } else {
-            go(map);
+            go(IEatable.class);
         }
     }
 
@@ -39,27 +39,5 @@ public abstract class Herbivore extends Creature {
     private void eat(Entity entity) {
         IEatable eatable = (IEatable)entity;
         setHp(eatable.getHpAmount());
-    }
-
-    @Override
-    public void go(Map map) {
-        List<Entity> targets = map.getEntityByType(IEatable.class);
-        Entity targetEatable = targets.get(0);
-        Coordinates targetCoordinates = targetEatable.coordinates;
-        List<Node> path =  getPath(coordinates, targetCoordinates, map);
-
-        for (int i = 0; i < speed; i++) {
-            if (isCanInteract(IEatable.class)) {
-                Coordinates interactEntityCoordinates = getInteractEntityCoordinates(IEatable.class);
-                Entity entity = map.getEntity(interactEntityCoordinates);
-
-                toInteract();
-                break;
-            } else {
-                map.moveEntity(coordinates, path.get(i).getCoordinates());
-            }
-
-            new MapConsoleRenderer().render(map);
-        }
     }
 }

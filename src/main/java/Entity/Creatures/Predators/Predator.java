@@ -34,7 +34,7 @@ public abstract class Predator extends Creature {
         if (isCanInteract(Herbivore.class)) {
             toInteract();
         } else {
-            go(map);
+            go(Herbivore.class);
         }
     }
 
@@ -44,26 +44,5 @@ public abstract class Predator extends Creature {
 
         Herbivore herbivore = (Herbivore)entity;
         herbivore.setHp(-damage);
-    }
-
-    @Override
-    public void go(Map map) {
-        Entity targetEntity = (Creature)map.getEntityByType(Herbivore.class).get(0);
-        Coordinates targetCoordinates = targetEntity.coordinates;
-        List<Node> path =  getPath(coordinates, targetCoordinates, map);
-
-        for (int i = 0; i < speed; i++) {
-            if (isCanInteract(Herbivore.class)) {
-                Coordinates interactEntityCoordinates = getInteractEntityCoordinates(Herbivore.class);
-                Entity entity = map.getEntity(interactEntityCoordinates);
-
-                toInteract();
-                break;
-            } else {
-                map.moveEntity(coordinates, path.get(i).getCoordinates());
-            }
-
-            new MapConsoleRenderer().render(map);
-        }
     }
 }
