@@ -2,7 +2,7 @@ package Actions.TurnActions;
 
 import Entity.Creatures.Creature;
 import Entity.Entity;
-import Map.Map;
+import Map.*;
 
 import java.util.List;
 
@@ -23,7 +23,9 @@ public class TurnEntityAction extends TurnAction{
         for (Object entity : entities) {
             Creature creature = (Creature) entity;
 
+            new MapConsoleRenderer().render(map);
             creature.makeMove();
+            new MapConsoleRenderer().render(map);
         }
     }
 
