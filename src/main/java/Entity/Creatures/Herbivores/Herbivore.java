@@ -32,6 +32,11 @@ public abstract class Herbivore extends Creature {
         eat(entity);
     }
 
+    @Override
+    public boolean availableInteractEntity() {
+        return !map.getEntityByType(IEatable.class).isEmpty();
+    }
+
     private void eat(Entity entity) {
         IEatable eatable = (IEatable)entity;
         setHp(eatable.getHpAmount());

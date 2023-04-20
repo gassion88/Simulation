@@ -27,6 +27,8 @@ public abstract class Creature extends Entity {
         return getInteractEntityCoordinates(entityClass) != null;
     }
 
+    public abstract boolean availableInteractEntity();
+
     public Coordinates getInteractEntityCoordinates(Class<?> classType) {
         Coordinates verifiableCoordinates = null;
 

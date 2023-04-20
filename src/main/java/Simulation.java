@@ -1,6 +1,8 @@
 import Actions.InitActions.InitAction;
 import Actions.TurnActions.TurnAction;
+import Entity.Creatures.Creature;
 import Entity.Creatures.Herbivores.Herbivore;
+import Entity.Entity;
 import Entity.Inanimates.IEatable;
 import Map.*;
 
@@ -34,10 +36,15 @@ public class Simulation {
     }
 
     private boolean isSimulationEnd() {
-        if (map.getEntityByType(Herbivore.class).isEmpty()) return true;
-        if (map.getEntityByType(IEatable.class).isEmpty()) return true;
+        for (Object entityObject : map.getEntityByType(Creature.class)) {
+            Creature creature = (Creature) entityObject;
 
-        return false;
+            if (!creature.availableInteractEntity()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void pauseSimulation() {

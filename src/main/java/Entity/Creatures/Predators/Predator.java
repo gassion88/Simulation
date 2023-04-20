@@ -2,6 +2,7 @@ package Entity.Creatures.Predators;
 
 import Entity.Creatures.Creature;
 import Entity.Creatures.Herbivores.Herbivore;
+import Entity.Inanimates.IEatable;
 import service.Node;
 import Entity.Entity;
 import Map.*;
@@ -21,6 +22,11 @@ public abstract class Predator extends Creature {
     @Override
     public void toInteract(Entity entity) {
         attack(entity);
+    }
+
+    @Override
+    public boolean availableInteractEntity() {
+        return !map.getEntityByType(Herbivore.class).isEmpty();
     }
 
     @Override
