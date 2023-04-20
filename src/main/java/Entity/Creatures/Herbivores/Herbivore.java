@@ -23,7 +23,7 @@ public abstract class Herbivore extends Creature {
 
             toInteract(entity);
         } else {
-            System.out.println("Not interact Entity");
+            go(map);
         }
     }
 
