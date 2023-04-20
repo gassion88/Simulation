@@ -20,8 +20,8 @@ public abstract class Predator extends Creature {
     }
 
     @Override
-    public void toInteract(Entity entity) {
-        attack(entity);
+    public void toInteract() {
+        attack();
     }
 
     @Override
@@ -32,16 +32,16 @@ public abstract class Predator extends Creature {
     @Override
     public void makeMove() {
         if (isCanInteract(Herbivore.class)) {
-            Coordinates interactEntityCoordinates = getInteractEntityCoordinates(Herbivore.class);
-            Entity entity = map.getEntity(interactEntityCoordinates);
-
-            toInteract(entity);
+            toInteract();
         } else {
             go(map);
         }
     }
 
-    public void attack(Entity entity){
+    public void attack(){
+        Coordinates interactEntityCoordinates = getInteractEntityCoordinates(Herbivore.class);
+        Entity entity = map.getEntity(interactEntityCoordinates);
+
         Herbivore herbivore = (Herbivore)entity;
         herbivore.setHp(-damage);
     }
@@ -57,7 +57,7 @@ public abstract class Predator extends Creature {
                 Coordinates interactEntityCoordinates = getInteractEntityCoordinates(Herbivore.class);
                 Entity entity = map.getEntity(interactEntityCoordinates);
 
-                toInteract(entity);
+                toInteract();
                 break;
             } else {
                 map.moveEntity(coordinates, path.get(i).getCoordinates());

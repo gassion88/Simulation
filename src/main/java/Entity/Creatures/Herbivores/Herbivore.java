@@ -18,17 +18,16 @@ public abstract class Herbivore extends Creature {
     @Override
     public void makeMove() {
         if (isCanInteract(IEatable.class)) {
-            Coordinates interactEntityCoordinates = getInteractEntityCoordinates(IEatable.class);
-            Entity entity = map.getEntity(interactEntityCoordinates);
-
-            toInteract(entity);
+            toInteract();
         } else {
             go(map);
         }
     }
 
     @Override
-    public void toInteract(Entity entity) {
+    public void toInteract() {
+        Coordinates interactEntityCoordinates = getInteractEntityCoordinates(IEatable.class);
+        Entity entity = map.getEntity(interactEntityCoordinates);
         eat(entity);
     }
 
@@ -54,7 +53,7 @@ public abstract class Herbivore extends Creature {
                 Coordinates interactEntityCoordinates = getInteractEntityCoordinates(IEatable.class);
                 Entity entity = map.getEntity(interactEntityCoordinates);
 
-                toInteract(entity);
+                toInteract();
                 break;
             } else {
                 map.moveEntity(coordinates, path.get(i).getCoordinates());
