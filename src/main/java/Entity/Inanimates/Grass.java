@@ -13,6 +13,7 @@ public class Grass extends Inanimate implements IEatable{
 
     @Override
     public int getHpAmount() {
+        map.removeEntity(coordinates);
         return hpAmount;
     }
 }

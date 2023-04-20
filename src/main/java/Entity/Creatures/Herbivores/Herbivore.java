@@ -40,14 +40,13 @@ public abstract class Herbivore extends Creature {
     private void eat(Entity entity) {
         IEatable eatable = (IEatable)entity;
         setHp(eatable.getHpAmount());
-
-        map.removeEntity(entity.coordinates);
     }
 
     @Override
     public void go(Map map) {
-        Entity targetiEatable = (Entity) map.getEntityByType(IEatable.class).get(0);
-        Coordinates targetCoordinates = targetiEatable.coordinates;
+        List<Entity> targets = map.getEntityByType(IEatable.class);
+        Entity targetEatable = targets.get(0);
+        Coordinates targetCoordinates = targetEatable.coordinates;
         List<Node> path =  getPath(coordinates, targetCoordinates, map);
 
         for (int i = 0; i < speed; i++) {
