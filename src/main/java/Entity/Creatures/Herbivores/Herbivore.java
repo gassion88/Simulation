@@ -51,8 +51,8 @@ public abstract class Herbivore extends Creature {
         List<Node> path =  getPath(coordinates, targetCoordinates, map);
 
         for (int i = 0; i < speed; i++) {
-            if (isCanInteract(Herbivore.class)) {
-                Coordinates interactEntityCoordinates = getInteractEntityCoordinates(Herbivore.class);
+            if (isCanInteract(IEatable.class)) {
+                Coordinates interactEntityCoordinates = getInteractEntityCoordinates(IEatable.class);
                 Entity entity = map.getEntity(interactEntityCoordinates);
 
                 toInteract(entity);
