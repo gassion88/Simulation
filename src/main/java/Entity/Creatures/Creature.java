@@ -56,7 +56,7 @@ public abstract class Creature extends Entity {
     public void setHp( int hpAmount) {
         if ((hpAmount + hp) >= maxHp) {
             hp = maxHp;
-        } else if ((hp - hpAmount) <= 0 ) {
+        } else if ((hp + hpAmount) <= 0 ) {
             hp = 0;
         } else {
             hp += hpAmount;
