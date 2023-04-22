@@ -6,7 +6,7 @@ import Map.*;
 
 import java.util.List;
 
-public class TurnEntityAction extends TurnAction{
+public class TurnEntityAction extends TurnAction {
     Map map;
     public TurnEntityAction(Map map) {
         this.map = map;
@@ -17,7 +17,7 @@ public class TurnEntityAction extends TurnAction{
         turnEntities(map);
     }
 
-    private void turnEntities(Map map) {
+    private void turnEntities(Map map)  {
         List<?> entities = map.getEntityByType(Creature.class);
 
         for (Object entity : entities) {
@@ -25,6 +25,12 @@ public class TurnEntityAction extends TurnAction{
 
             new MapConsoleRenderer().render(map);
             creature.makeMove();
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             new MapConsoleRenderer().render(map);
         }
     }

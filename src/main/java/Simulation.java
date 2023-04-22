@@ -33,6 +33,8 @@ public class Simulation {
         while (!isSimulationEnd()) {
             nextTurn();
         }
+
+        System.out.println("End simulation");
     }
 
     private boolean isSimulationEnd() {
@@ -40,11 +42,11 @@ public class Simulation {
             Creature creature = (Creature) entityObject;
 
             if (!creature.availableInteractEntity()) {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public void pauseSimulation() {

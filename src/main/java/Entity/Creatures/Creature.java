@@ -58,6 +58,11 @@ public abstract class Creature extends Entity {
 
     public void go(Class<?> entityClass) {
         List<Entity> targets = map.getEntityByType(entityClass);
+
+        if (targets.isEmpty()) {
+            return;
+        }
+
         Entity targetEntity = targets.get(0);
         Coordinates targetCoordinates = targetEntity.coordinates;
         List<Node> path =  getPath(coordinates, targetCoordinates, map);
@@ -70,10 +75,15 @@ public abstract class Creature extends Entity {
                 toInteract();
                 break;
             } else {
-                map.moveEntity(coordinates, path.get(i).getCoordinates());
-            }
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            new MapConsoleRenderer().render(map);
+                map.moveEntity(coordinates, path.get(i).getCoordinates());
+                new MapConsoleRenderer().render(map);
+            }
         }
     }
 
