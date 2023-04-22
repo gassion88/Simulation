@@ -43,7 +43,7 @@ public class Map {
         return true;
     }
 
-    public List<?> getEntityByType(Class<?> entityType) {
+    public List<Entity> getEntityByType(Class<?> entityType) {
         List<Entity> entities = new ArrayList<>();
 
         for (Entity entity : this.entity.values()) {
