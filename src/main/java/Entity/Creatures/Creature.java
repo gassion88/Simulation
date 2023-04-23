@@ -92,12 +92,9 @@ public abstract class Creature extends Entity {
             hp = maxHp;
         } else if ((hp + hpAmount) <= 0 ) {
             hp = 0;
+            map.removeEntity(coordinates);
         } else {
             hp += hpAmount;
-        }
-
-        if (hp <= 0) {
-            map.removeEntity(coordinates);
         }
     }
 }
