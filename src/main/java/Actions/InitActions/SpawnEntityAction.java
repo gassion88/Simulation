@@ -41,7 +41,6 @@ public class SpawnEntityAction extends InitAction {
             int coordinateX = random.nextInt(1, map.weight+1);
             int coordinateY = random.nextInt(1, map.height+1);
             Coordinates spawnCoordinate = new Coordinates(coordinateX, coordinateY);
-            System.out.println(coordinateX + "");
 
             if (!map.isSquareEmpty(spawnCoordinate)) {
                 continue;
