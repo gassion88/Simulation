@@ -4,7 +4,11 @@ import Entity.Creatures.Creature;
 import Entity.Entity;
 import Map.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TurnEntityAction extends TurnAction {
     Map map;
@@ -18,11 +22,15 @@ public class TurnEntityAction extends TurnAction {
     }
 
     private void turnEntities(Map map)  {
-        List<?> entities = map.getEntityByType(Creature.class);
+        ArrayList<Entity> entities = new ArrayList<>(map.getEntityByType(Creature.class));
+
 
         for (Object entity : entities) {
-            Creature creature = (Creature) entity;
+            if (!map.getEntityByType(Creature.class).contains(entity)) {
+                continue;
+            }
 
+            Creature creature = (Creature) entity;
             new MapConsoleRenderer().render(map);
             creature.makeMove();
 
