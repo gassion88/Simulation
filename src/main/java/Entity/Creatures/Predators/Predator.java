@@ -20,6 +20,15 @@ public abstract class Predator extends Creature {
     }
 
     @Override
+    public void makeMove() {
+        if (isCanInteract(Herbivore.class)) {
+            toInteract();
+        } else {
+            go(Herbivore.class);
+        }
+    }
+
+    @Override
     public void toInteract() {
         attack();
     }
@@ -27,15 +36,6 @@ public abstract class Predator extends Creature {
     @Override
     public boolean availableInteractEntity() {
         return !map.getEntityByType(Herbivore.class).isEmpty();
-    }
-
-    @Override
-    public void makeMove() {
-        if (isCanInteract(Herbivore.class)) {
-            toInteract();
-        } else {
-            go(Herbivore.class);
-        }
     }
 
     public void attack(){
