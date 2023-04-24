@@ -1,10 +1,7 @@
 package Actions.InitActions;
 
 import Entity.Entity;
-import Entity.Factory.DeerFactory;
 import Entity.Factory.EntityFactory;
-import Entity.Factory.GrassFactory;
-import Entity.Factory.WolfFactory;
 import Map.*;
 import Map.Map;
 
@@ -13,7 +10,7 @@ import java.util.*;
 public class SpawnEntityAction extends InitAction {
     HashMap<EntityFactory, Integer> possibleEntity;
     Map map;
-    Random random = new Random();
+    static final Random RANDOM = new Random();
 
     public SpawnEntityAction(HashMap<EntityFactory, Integer> possibleEntity, Map map) {
         this.possibleEntity = possibleEntity;
@@ -36,10 +33,9 @@ public class SpawnEntityAction extends InitAction {
     private void spawnEntityByProbability(Map map, int spawnProbability, EntityFactory entityFactory) {
         int entityNumber = (map.height * map.weight) / 100 * spawnProbability;
 
-        int i = 0;
-        while (true){
-            int coordinateX = random.nextInt(1, map.weight+1);
-            int coordinateY = random.nextInt(1, map.height+1);
+        for (int entityAmount = 0; entityAmount < entityNumber;){
+            int coordinateX = RANDOM.nextInt(1, map.weight+1);
+            int coordinateY = RANDOM.nextInt(1, map.height+1);
             Coordinates spawnCoordinate = new Coordinates(coordinateX, coordinateY);
 
             if (!map.isSquareEmpty(spawnCoordinate)) {
@@ -48,25 +44,7 @@ public class SpawnEntityAction extends InitAction {
 
             Entity entity = entityFactory.create(map);
             map.setEntity(spawnCoordinate, entity);
-            i++;
-
-            if (i == entityNumber) {
-                break;
-            }
+            entityAmount++;
         }
-    }
-
-    public static void main(String[] args) {
-        Map map = new Map(10,10);
-
-        HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn = new HashMap<>();
-        entityAndHerProbabilitySpawn.put(new WolfFactory(), 5);
-        entityAndHerProbabilitySpawn.put(new DeerFactory(), 10);
-        entityAndHerProbabilitySpawn.put(new GrassFactory(), 10);
-
-        SpawnEntityAction spawnEntityAction = new SpawnEntityAction(entityAndHerProbabilitySpawn, map);
-        spawnEntityAction.init();
-
-        new MapConsoleRenderer().render(map);
     }
 }
