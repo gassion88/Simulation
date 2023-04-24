@@ -1,6 +1,7 @@
 package Map;
 
 import Entity.Entity;
+import resources.Sprites;
 
 public class MapConsoleRenderer {
     public void render(Map map) {
@@ -27,6 +28,6 @@ public class MapConsoleRenderer {
     }
 
     private String getEmptySquareSprite() {
-        return "..  ";
+        return Sprites.emptySprite;
     }
 }
