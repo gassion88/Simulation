@@ -8,8 +8,8 @@ import Map.Map;
 import java.util.*;
 
 public class SpawnEntityAction extends InitAction {
-    HashMap<EntityFactory, Integer> possibleEntity;
-    Map map;
+    private final HashMap<EntityFactory, Integer> possibleEntity;
+    private final Map map;
     static final Random RANDOM = new Random();
 
     public SpawnEntityAction(HashMap<EntityFactory, Integer> possibleEntity, Map map) {

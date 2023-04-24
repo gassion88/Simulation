@@ -5,13 +5,9 @@ import Entity.Entity;
 import Map.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TurnEntityAction extends TurnAction {
-    Map map;
+    private final Map map;
     public TurnEntityAction(Map map) {
         this.map = map;
     }
@@ -25,7 +21,7 @@ public class TurnEntityAction extends TurnAction {
         ArrayList<Entity> entities = new ArrayList<>(map.getEntityByType(Creature.class));
 
 
-        for (Object entity : entities) {
+        for (Entity entity : entities) {
             if (!map.getEntityByType(Creature.class).contains(entity)) {
                 continue;
             }
@@ -42,6 +38,4 @@ public class TurnEntityAction extends TurnAction {
             new MapConsoleRenderer().render(map);
         }
     }
-
-
 }
