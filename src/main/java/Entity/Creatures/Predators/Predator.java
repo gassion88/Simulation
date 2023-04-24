@@ -2,14 +2,8 @@ package Entity.Creatures.Predators;
 
 import Entity.Creatures.Creature;
 import Entity.Creatures.Herbivores.Herbivore;
-import Entity.Inanimates.IEatable;
-import service.Node;
 import Entity.Entity;
 import Map.*;
-
-import java.util.List;
-
-import static service.PathFinder.getPath;
 
 public abstract class Predator extends Creature {
     public int damage;

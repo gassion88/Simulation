@@ -1,14 +1,9 @@
 package Entity.Creatures.Herbivores;
 
 import Entity.Creatures.Creature;
-import service.Node;
 import Entity.Entity;
 import Entity.Inanimates.IEatable;
 import Map.*;
-
-import java.util.List;
-
-import static service.PathFinder.getPath;
 
 public abstract class Herbivore extends Creature {
     public Herbivore(Coordinates coordinates, String sprite, Map map, int maxHp, int hp, int speed) {

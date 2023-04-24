@@ -1,13 +1,10 @@
 package Entity.Creatures;
 
-import Entity.Creatures.Herbivores.Herbivore;
 import Entity.Entity;
-import Entity.Inanimates.IEatable;
 import Map.*;
 import service.Node;
 
 import java.util.List;
-import java.util.Objects;
 
 import static service.PathFinder.getPath;
 
