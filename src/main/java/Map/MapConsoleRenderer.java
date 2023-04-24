@@ -29,9 +29,4 @@ public class MapConsoleRenderer {
     private String getEmptySquareSprite() {
         return "..  ";
     }
-
-    public static void main(String[] args) {
-        Map map = new Map(7, 7);
-        new MapConsoleRenderer().render(map);
-    }
 }
