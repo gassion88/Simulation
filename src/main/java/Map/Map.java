@@ -9,7 +9,7 @@ import java.util.List;
 public class Map {
     public final int height;
     public final int weight;
-    private HashMap<Coordinates, Entity> entity = new HashMap<>();
+    private final HashMap<Coordinates, Entity> entity = new HashMap<>();
 
     public Map(int height, int weight) {
         this.height = height;

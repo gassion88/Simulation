@@ -33,7 +33,5 @@ public class MapConsoleRenderer {
     public static void main(String[] args) {
         Map map = new Map(7, 7);
         new MapConsoleRenderer().render(map);
-        // map.setEntity(new Coordinates(1,1), );
-
     }
 }
