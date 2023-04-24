@@ -13,7 +13,6 @@ public abstract class Creature extends Entity {
     public int hp;
     public final int speed;
 
-
     public Creature(Coordinates coordinates, String sprite, Map map, int maxHp, int hp, int speed) {
         super(coordinates, sprite, map);
         this.maxHp = maxHp;
@@ -27,8 +26,6 @@ public abstract class Creature extends Entity {
     public boolean isCanInteract(Class<?> entityClass){
         return getInteractEntityCoordinates(entityClass) != null;
     }
-
-    public abstract boolean availableInteractEntity();
 
     public Coordinates getInteractEntityCoordinates(Class<?> classType) {
         Coordinates verifiableCoordinates = null;
@@ -49,9 +46,10 @@ public abstract class Creature extends Entity {
             }
         }
 
-        verifiableCoordinates = null;
-        return verifiableCoordinates;
+        return null;
     }
+
+    public abstract boolean availableInteractEntity();
 
     public void go(Class<?> entityClass) {
         List<Entity> targets = map.getEntityByType(entityClass);
@@ -66,9 +64,6 @@ public abstract class Creature extends Entity {
 
         for (int i = 0; i < speed; i++) {
             if (isCanInteract(entityClass)) {
-                Coordinates interactEntityCoordinates = getInteractEntityCoordinates(entityClass);
-                Entity entity = map.getEntity(interactEntityCoordinates);
-
                 toInteract();
                 break;
             } else {
@@ -85,7 +80,7 @@ public abstract class Creature extends Entity {
     }
 
     public void setHp( int hpAmount) {
-        if ((hpAmount + hp) >= maxHp) {
+        if ((hp + hpAmount) >= maxHp) {
             hp = maxHp;
         } else if ((hp + hpAmount) <= 0 ) {
             hp = 0;
