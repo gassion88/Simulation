@@ -1,11 +1,11 @@
 package resources;
 
 public class Strings {
-    public static String menuStepOne = """
+    public static final String menuStepOne = """
                 1.Сгенерировать симуляцию.
                 2.Выйти
                 """;
-    public static String menuStepTwo = """
+    public static final String menuStepTwo = """
                 1.Рандомная генерация.
                 2.Настроить генерацию.
                 3.Выйти.

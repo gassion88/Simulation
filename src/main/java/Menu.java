@@ -1,25 +1,60 @@
 import java.util.Scanner;
 
+import static resources.Strings.menuStepOne;
+import static resources.Strings.menuStepTwo;
+
 public class Menu {
     Simulation simulation;
-    static Scanner scanner = new Scanner(System.in);
+    private static int menuStep = 1;
+    private static Scanner scanner = new Scanner(System.in);
 
     public Menu() {
     }
 
-    public static void startMenu(){
-        int menuStep = 1;
-
+    public void startMenu(){
         while (true) {
+            String status = null;
+
             outputMenuByStep(menuStep);
             String userInput = inputUser();
 
-            if (userInput.equals("1")) {
-                System.out.println("Start");
-            } else if (userInput.equals("2")) {
+            status = updateMenu(menuStep, userInput);
+
+            if (status.equals("Exit")) {
                 return;
+            }  else if (status.equals("Generate random simulation")) {
+                startRandomSimulation();
+            } else if (status.equals("Configure simulation")) {
+                startConfigureSimulation();
             }
         }
+    }
+
+    private void startConfigureSimulation() {
+    }
+
+    private void startRandomSimulation() {
+    }
+
+    private String updateMenu(int menuStep, String inputUser) {
+        String status = "";
+
+        if (menuStep == 1) {
+            if (inputUser.equals("1")) {
+                Menu.menuStep++;
+                status = "StepTwo";
+            } else if (inputUser.equals("2")) {
+                return "Exit";
+            }
+        } else if (menuStep == 2 ) {
+            if (inputUser.equals("1")) {
+                status = "Generate random simulation";
+            } else if (inputUser.equals("2")) {
+                status = "Configure simulation";
+            }
+        }
+
+        return status;
     }
 
     private static String inputUser() {
@@ -35,13 +70,16 @@ public class Menu {
     }
 
     private static void outputMenuByStep(int menuStep) {
-        System.out.println("""
-                1.Сгенерировать симуляцию.
-                2.Выйти
-                """);
+        if (menuStep == 1) {
+            System.out.println(menuStepOne);
+            menuStep++;
+        } else if (menuStep == 2) {
+            System.out.println(menuStepTwo);
+        }
     }
 
     public static void main(String[] args) {
-        startMenu();
+        Menu menu = new Menu();
+        menu.startMenu();
     }
 }
