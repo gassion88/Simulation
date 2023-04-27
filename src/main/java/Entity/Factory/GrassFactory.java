@@ -29,9 +29,8 @@ public class GrassFactory implements EntityFactory {
 
     @Override
     public String toString() {
-        return "GrassFactory{" +
-                "coordinates=" + coordinates +
-                ", sprite='" + sprite + '\'' +
+        return "Grass{" +
+                "sprite='" + sprite + '\'' +
                 ", hpAmount=" + hpAmount +
                 '}';
     }

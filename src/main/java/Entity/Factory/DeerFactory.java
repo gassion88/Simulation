@@ -36,7 +36,7 @@ public class DeerFactory implements EntityFactory {
 
     @Override
     public String toString() {
-        return "DeerFactory{" +
+        return "Deer{" +
                 "sprite='" + sprite + '\'' +
                 ", maxHp=" + maxHp +
                 ", hp=" + hp +
