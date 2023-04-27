@@ -2,12 +2,12 @@ package resources;
 
 public class Strings {
     public static final String menuStepOne = """
-                1.Сгенерировать симуляцию.
-                2.Выйти
+                1.Generate simulation.
+                2.Exit
                 """;
     public static final String menuStepTwo = """
-                1.Рандомная генерация.
-                2.Настроить генерацию.
-                3.Выйти.
+                1.Random simulation.
+                2.Configure simulation.
+                3.Exit.
                 """;
 }
