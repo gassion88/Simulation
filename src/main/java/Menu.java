@@ -1,3 +1,13 @@
+import Actions.InitActions.SpawnEntityAction;
+import Actions.TurnActions.TurnEntityAction;
+import Entity.Factory.DeerFactory;
+import Entity.Factory.EntityFactory;
+import Entity.Factory.GrassFactory;
+import Entity.Factory.WolfFactory;
+import Map.*;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import static resources.Strings.menuStepOne;
@@ -34,6 +44,19 @@ public class Menu {
     }
 
     private void startRandomSimulation() {
+        Map map = new Map(10,10);
+
+        HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn = new HashMap<>();
+        entityAndHerProbabilitySpawn.put(new WolfFactory(), 3);
+        entityAndHerProbabilitySpawn.put(new DeerFactory(), 3);
+        entityAndHerProbabilitySpawn.put(new GrassFactory(), 6);
+        SpawnEntityAction spawnEntityAction = new SpawnEntityAction(entityAndHerProbabilitySpawn, map);
+        TurnEntityAction turnEntityAction = new TurnEntityAction(map);
+
+        MapConsoleRenderer mapConsoleRenderer = new MapConsoleRenderer();
+
+        simulation = new Simulation(map, mapConsoleRenderer, List.of(spawnEntityAction), List.of(turnEntityAction));
+        simulation.startSimulation();
     }
 
     private String updateMenu(int menuStep, String inputUser) {
@@ -51,6 +74,8 @@ public class Menu {
                 status = "Generate random simulation";
             } else if (inputUser.equals("2")) {
                 status = "Configure simulation";
+            } else if (inputUser.equals("3")) {
+                status = "Exit";
             }
         }
 
