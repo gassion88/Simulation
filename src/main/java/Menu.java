@@ -1,5 +1,6 @@
 import Actions.InitActions.SpawnEntityAction;
 import Actions.TurnActions.TurnEntityAction;
+import Entity.Entity;
 import Entity.Factory.*;
 import Map.*;
 
@@ -43,17 +44,30 @@ public class Menu {
 
     private void startConfigureSimulation() {
         viewAvailableEntity();
-        //selectInAvailableEntity();
+        selectInAvailableEntity();
+    }
 
+    private void selectInAvailableEntity() {
+        String userInput = inputUser();
+
+        String[] entity = userInput.split(" ");
+
+        for (String en : entity) {
+            int entityNumber = Integer.parseInt(en.split(":")[0]);
+            EntityFactory entityFactory = entityFactories.get(entityNumber);
+            int entityProbability = Integer.parseInt(en.split(":")[1]);
+
+            entityAndHerProbabilitySpawn.put(entityFactory, entityProbability);
+        }
     }
 
     private void viewAvailableEntity() {
         System.out.println("Select number entity and her amount");
         System.out.println(" ");
 
-        for (int i = 1; i <= entityFactories.size(); i++) {
-            EntityFactory entityFactory = entityFactories.get(i-1);
-            System.out.println(i + ". " + entityFactory.toString());
+        for (int i = 0; i < entityFactories.size(); i++) {
+            EntityFactory entityFactory = entityFactories.get(i);
+            System.out.println(i+1 + ". " + entityFactory.toString());
         }
         System.out.println(" ");
     }
