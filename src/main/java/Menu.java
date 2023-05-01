@@ -48,11 +48,14 @@ public class Menu {
     }
 
     private void viewAvailableEntity() {
-        System.out.println("Select entities");
+        System.out.println("Select number entity and her amount");
         System.out.println(" ");
-        for (EntityFactory entityFactory : entityFactories) {
-            System.out.println(entityFactory.toString());
+
+        for (int i = 1; i <= entityFactories.size(); i++) {
+            EntityFactory entityFactory = entityFactories.get(i-1);
+            System.out.println(i + ". " + entityFactory.toString());
         }
+        System.out.println(" ");
     }
 
     private void startRandomSimulation() {
