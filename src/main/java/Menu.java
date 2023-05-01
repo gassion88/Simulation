@@ -80,7 +80,7 @@ public class Menu {
 
         if (menuStep == 1) {
             if (inputUser.equals("1")) {
-                Menu.menuStep++;
+                this.menuStep++;
                 status = "StepTwo";
             } else if (inputUser.equals("2")) {
                 return "Exit";
