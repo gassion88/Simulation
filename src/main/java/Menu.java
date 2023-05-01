@@ -2,6 +2,7 @@ import Actions.InitActions.SpawnEntityAction;
 import Actions.TurnActions.TurnEntityAction;
 import Entity.Factory.*;
 import Map.*;
+import resources.Strings;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,11 +32,11 @@ public class Menu {
 
             status = updateMenu(menuStep, userInput);
 
-            if (status.equals("Exit")) {
+            if (status.equals(Strings.exit)) {
                 return;
-            }  else if (status.equals("Generate random simulation")) {
+            }  else if (status.equals(Strings.generateRandomSimulation)) {
                 startRandomSimulation();
-            } else if (status.equals("Configure simulation")) {
+            } else if (status.equals(Strings.configureSimulation)) {
                 startConfigureSimulation();
             }
         }
@@ -64,7 +65,7 @@ public class Menu {
     }
 
     private void inputMenuSize() {
-        System.out.println("Select menu size");
+        System.out.println(Strings.selectMenuSize);
 
         String inputUser = inputUser();
         int height = Integer.parseInt(inputUser.split(" ")[0]);
@@ -74,7 +75,7 @@ public class Menu {
     }
 
     private void viewAvailableEntity() {
-        System.out.println("Select number entity and her amount");
+        System.out.println(Strings.selectNumberEntityAndHerAmount);
         System.out.println(" ");
 
         for (int i = 0; i < entityFactories.size(); i++) {
@@ -109,17 +110,17 @@ public class Menu {
         if (menuStep == 1) {
             if (inputUser.equals("1")) {
                 this.menuStep++;
-                status = "StepTwo";
+                status = Strings.stepTwo;
             } else if (inputUser.equals("2")) {
-                return "Exit";
+                return Strings.exit;
             }
         } else if (menuStep == 2 ) {
             if (inputUser.equals("1")) {
-                status = "Generate random simulation";
+                status = Strings.generateRandomSimulation;
             } else if (inputUser.equals("2")) {
-                status = "Configure simulation";
+                status = Strings.configureSimulation;
             } else if (inputUser.equals("3")) {
-                status = "Exit";
+                status = Strings.exit;
             }
         }
 
