@@ -1,10 +1,8 @@
 import Actions.InitActions.SpawnEntityAction;
 import Actions.TurnActions.TurnEntityAction;
-import Entity.Entity;
 import Entity.Factory.*;
 import Map.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +14,8 @@ public class Menu {
     Simulation simulation;
     private int menuStep = 1;
     private static final Scanner scanner = new Scanner(System.in);
-    HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn;
+    HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn = new HashMap<>();;
+    Map map;
     private  final List<EntityFactory> entityFactories = List.of(new WolfFactory(), new DeerFactory(), new GrassFactory(),
             new TreeFactory(), new RockFactory());
 
@@ -45,20 +44,33 @@ public class Menu {
     private void startConfigureSimulation() {
         viewAvailableEntity();
         selectInAvailableEntity();
+
+        inputMenuSize();
+
+        startSimulation();
     }
 
     private void selectInAvailableEntity() {
         String userInput = inputUser();
-
         String[] entity = userInput.split(" ");
 
         for (String en : entity) {
-            int entityNumber = Integer.parseInt(en.split(":")[0]);
+            int entityNumber = Integer.parseInt(en.split(":")[0])-1;
             EntityFactory entityFactory = entityFactories.get(entityNumber);
             int entityProbability = Integer.parseInt(en.split(":")[1]);
 
             entityAndHerProbabilitySpawn.put(entityFactory, entityProbability);
         }
+    }
+
+    private void inputMenuSize() {
+        System.out.println("Select menu size");
+
+        String inputUser = inputUser();
+        int height = Integer.parseInt(inputUser.split(" ")[0]);
+        int weight = Integer.parseInt(inputUser.split(" ")[1]);
+
+        map = new Map(height, weight);
     }
 
     private void viewAvailableEntity() {
@@ -73,12 +85,15 @@ public class Menu {
     }
 
     private void startRandomSimulation() {
-        Map map = new Map(10,10);
-
-        entityAndHerProbabilitySpawn = new HashMap<>();
         entityAndHerProbabilitySpawn.put(new WolfFactory(), 3);
         entityAndHerProbabilitySpawn.put(new DeerFactory(), 3);
         entityAndHerProbabilitySpawn.put(new GrassFactory(), 6);
+        map = new Map(10, 10);
+
+        startSimulation();
+    }
+
+    private void startSimulation() {
         SpawnEntityAction spawnEntityAction = new SpawnEntityAction(entityAndHerProbabilitySpawn, map);
         TurnEntityAction turnEntityAction = new TurnEntityAction(map);
 
