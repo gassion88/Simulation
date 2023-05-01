@@ -15,7 +15,7 @@ public class WolfFactory implements EntityFactory {
     int damage;
 
     public WolfFactory(){
-        this.coordinates = new Coordinates(1, 1);
+        this.coordinates = new Coordinates();
         this.sprite = Sprites.wolf;
         this.maxHP = 10;
         this.hp = 10;

@@ -11,7 +11,7 @@ public class GrassFactory implements EntityFactory {
     int hpAmount;
 
     public GrassFactory() {
-        this.coordinates = new Coordinates(1, 1);
+        this.coordinates = new Coordinates();
         this.sprite = Sprites.grass;
         this.hpAmount = 5;
     }

@@ -14,7 +14,7 @@ public class DeerFactory implements EntityFactory {
     int speed;
 
     public DeerFactory() {
-        this.coordinates = new Coordinates(1, 1);
+        this.coordinates = new Coordinates();
         this.sprite = Sprites.deer;
         this.maxHp = 15;
         this.hp = 15;

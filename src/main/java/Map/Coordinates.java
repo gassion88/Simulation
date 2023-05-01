@@ -1,8 +1,11 @@
 package Map;
 
 public class Coordinates {
-    public final int x;
-    public final int y;
+    public int x;
+    public int y;
+
+    public Coordinates() {
+    }
 
     public Coordinates(int x, int y) {
         this.x = x;
