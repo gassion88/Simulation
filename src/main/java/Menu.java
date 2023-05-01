@@ -16,8 +16,8 @@ import static resources.Strings.menuStepTwo;
 
 public class Menu {
     Simulation simulation;
-    private static int menuStep = 1;
-    private static Scanner scanner = new Scanner(System.in);
+    private int menuStep = 1;
+    private static final Scanner scanner = new Scanner(System.in);
     HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn;
 
     public Menu() {
