@@ -1,9 +1,6 @@
 import Actions.InitActions.SpawnEntityAction;
 import Actions.TurnActions.TurnEntityAction;
-import Entity.Factory.DeerFactory;
-import Entity.Factory.EntityFactory;
-import Entity.Factory.GrassFactory;
-import Entity.Factory.WolfFactory;
+import Entity.Factory.*;
 import Map.*;
 
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ public class Menu {
     private int menuStep = 1;
     private static final Scanner scanner = new Scanner(System.in);
     HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn;
+    private  final List<EntityFactory> entityFactories = List.of(new DeerFactory(), new GrassFactory(), new WolfFactory());
 
     public Menu() {
     }
@@ -44,14 +42,11 @@ public class Menu {
 
     private void startConfigureSimulation() {
         viewAvailableEntity();
+        //selectInAvailableEntity();
+
     }
 
     private void viewAvailableEntity() {
-        List<EntityFactory> entityFactories = new ArrayList<>();
-        entityFactories.add(new DeerFactory());
-        entityFactories.add(new WolfFactory());
-        entityFactories.add(new GrassFactory());
-
         System.out.println("Select entities");
         System.out.println(" ");
         for (EntityFactory entityFactory : entityFactories) {
