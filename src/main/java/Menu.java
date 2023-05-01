@@ -16,7 +16,7 @@ public class Menu {
     private int menuStep = 1;
     private static final Scanner scanner = new Scanner(System.in);
     HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn;
-    private  final List<EntityFactory> entityFactories = List.of(new DeerFactory(), new GrassFactory(), new WolfFactory());
+    private  final List<EntityFactory> entityFactories = List.of(new DeerFactory(), new GrassFactory(), new WolfFactory(), new TreeFactory());
 
     public Menu() {
     }
