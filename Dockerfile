@@ -4,4 +4,4 @@ LABEL authors="gassion88"
 WORKDIR /app
 COPY target/Simulation-1.0-SNAPSHOT.jar simulation.jar
 
-ENTRYPOINT ["java","-cp","simulation.jar", "Menu"]
+ENTRYPOINT ["java","-jar","simulation.jar"]
