@@ -18,6 +18,7 @@ public class Main {
         entityAndHerProbabilitySpawn.put(new WolfFactory(), 3);
         entityAndHerProbabilitySpawn.put(new DeerFactory(), 3);
         entityAndHerProbabilitySpawn.put(new GrassFactory(), 8);
+
         SpawnEntityAction spawnEntityAction = new SpawnEntityAction(entityAndHerProbabilitySpawn, map);
         TurnEntityAction turnEntityAction = new TurnEntityAction(map);
 

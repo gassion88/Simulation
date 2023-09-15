@@ -19,6 +19,7 @@ public class SpawnEntityAction extends InitAction {
 
     @Override
     public void init() {
+
         spawnPossibleEntity(map, possibleEntity);
     }
 
