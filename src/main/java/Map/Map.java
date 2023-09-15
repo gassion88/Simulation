@@ -61,4 +61,8 @@ public class Map {
 
         setEntity(targetCoordinates, entity);
     }
+
+    public List<Entity> getAllEntity() {
+        return entity.values().stream().toList();
+    }
 }
