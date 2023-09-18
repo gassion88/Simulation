@@ -20,7 +20,6 @@ public class TurnEntityAction extends TurnAction {
     private void turnEntities(Map map)  {
         ArrayList<Entity> entities = new ArrayList<>(map.getEntityByType(Creature.class));
 
-
         for (Entity entity : entities) {
             if (!map.getEntityByType(Creature.class).contains(entity)) {
                 continue;
