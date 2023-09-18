@@ -5,7 +5,6 @@ import Entity.Factory.EntityFactory;
 import Entity.Factory.GrassFactory;
 import Entity.Factory.WolfFactory;
 import Map.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,6 @@ class SpawnEntityActionTest {
     void preparedDate() {
         map = new Map(10,10);
     }
-
 
     @Test
     void checkExistenceEntity() {
@@ -49,5 +47,4 @@ class SpawnEntityActionTest {
 
         assertEquals(map.getAllEntity().size(), 0);
     }
-
 }
