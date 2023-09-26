@@ -6,6 +6,7 @@ import Entity.Factory.GrassFactory;
 import Entity.Factory.WolfFactory;
 import Map.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ class SpawnEntityActionTest {
     }
 
     @Test
+    @DisplayName("Entity generating test...")
     void checkExistenceEntity() {
         HashMap<EntityFactory, Integer> entityAndHerProbabilitySpawn = new HashMap<>();
         entityAndHerProbabilitySpawn.put(new WolfFactory(), 3);
